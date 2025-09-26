@@ -9,13 +9,6 @@ const adminRoutes = require('./routes/adminRoutes');
 
 
 
-
-
-
-
-
-
-
 dotenv.config();
 const app = express();
 
