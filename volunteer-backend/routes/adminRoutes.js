@@ -67,4 +67,18 @@ router.get('/stats/summary', auth, async (req, res) => {
   });
 });
 
+
+router.delete('/users/:id', auth, async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.json({ message: 'User deleted' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to delete user' });
+  }
+});
+
 module.exports = router;

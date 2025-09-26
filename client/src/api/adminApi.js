@@ -41,3 +41,20 @@ export const getAllUsers = async (token) => {
   });
   return res.data;
 };
+
+
+export const deleteUser = async (userId, token) => {
+  const res = await fetch(`/api/admin/users/${userId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message || 'Delete failed');
+  }
+
+  return true;
+};
